@@ -1,0 +1,6 @@
+.login-card {
+  max-width: 420px;
+}
+.btn-primary {
+  @apply bg-blue-500 text-white p-2 w-full rounded hover:bg-blue-600 transition;
+}

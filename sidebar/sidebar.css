@@ -1,0 +1,5 @@
+.sidebar { min-width: 260px; }
+.room-list .room-item { padding: 8px 10px; transition: background-color 0.2s; }
+.room-list .room-item:hover { background-color: #e0e7ff; }
+.room-list .active { background-color: #bfdbfe; font-weight: 500; }
+.btn-create { @apply bg-indigo-500 text-white p-2 w-full rounded hover:bg-indigo-600 transition; }

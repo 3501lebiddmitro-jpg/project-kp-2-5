@@ -1,0 +1,9 @@
+<template x-if="!accessToken">
+  <div class="login-card">
+    <h2 class="text-xl font-bold mb-4">Login</h2>
+    <input x-model="username" placeholder="Username (e.g., @user:matrix.org)" class="border p-2 w-full mb-2 rounded" autocomplete="username" />
+    <input x-model="password" type="password" placeholder="Password" class="border p-2 w-full mb-2 rounded" autocomplete="current-password" />
+    <button @click="login()" class="btn-primary">Login</button>
+    <p x-text="error" class="text-red-500 mt-2"></p>
+  </div>
+</template>

@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Matrix Chat</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/alpinejs" defer></script>
+    <link rel="stylesheet" href="./login/login.css" />
+    <link rel="stylesheet" href="./sidebar/sidebar.css" />
+    <script src="./login/login.js"></script>
+    <script src="./sidebar/sidebar.js"></script>
+</head>
+
+<body class="bg-gray-100 flex items-center justify-center p-4">
+    <div x-data="chatApp()" class="chat-container bg-white rounded-lg shadow-lg flex w-full max-w-5xl">
+        <div id="sidebar-container" class="hidden"></div>
+        <div class="chat-area p-4 flex-1 flex flex-col">
+            <div id="login-container"></div>
+            <template x-if="accessToken">
+                <div class="mt-4 text-sm text-gray-600">
+                    <p>Вы вошли как: <span class="font-medium" x-text="userId"></span></p>
+                    <p class="mt-1">Выберите комнату в сайдбаре или создайте новую.</p>
+                </div>
+            </template>
+            <p x-show="error" x-text="error" class="text-red-600 mt-3"></p>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            fetch('./login/login.html')
+                .then(r => r.text())
+                .then(html => document.getElementById('login-container').innerHTML = html);
+            fetch('./sidebar/sidebar.html')
+                .then(r => r.text())
+                .then(html => {
+                    const el = document.getElementById('sidebar-container');
+                    el.innerHTML = html;
+                    el.classList.remove('hidden');
+                });
+        });
+
+        function chatApp() {
+            return {
+                username: '',
+                password: '',
+                accessToken: '',
+                userId: '',
+                roomId: '',
+                rooms: [],
+                messages: [],
+                newRoomName: '',
+                newRoomId: '',
+                lastSyncToken: '',
+                error: '',
+                login,
+                fetchRoomsWithNames,
+                createRoom,
+                switchRoom,
+                fetchMessages,
+                getRoomName,
+            };
+        }
+    </script>
+
+    <style>
+        .chat-container {
+            min-height: 80vh;
+        }
+
+        .chat-area {
+            min-height: 80vh;
+        }
+    </style>
+</body>
+
+</html>
